@@ -20,6 +20,8 @@ them. If this is not the first time you've run it, perhaps you've edited the off
 deletes any old "-3Dprinting" copies, and then generates the new files. Once you fire up Fusion 360 you'll find the threads dialog
 dropdown now contains the usual threads selections, as well as copies for 3D printing.
 
+![screenshot](screenshot.png)
+
 While testing this I first tried just using a single offset for all the threads, but that didn't work very well at all. Smaller
 thread pitches don't seem to need as much compensation as larger pitches do. And at a certain point there also doesn't seem to
 be any need to continue using more and more compensation. So I've made it use smaller offsets for smaller thread pitches, and as
