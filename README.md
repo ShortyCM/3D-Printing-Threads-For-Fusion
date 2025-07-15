@@ -1,3 +1,25 @@
+Here's a python script I've come up with in an attempt to handle modelled threads for 3D printing to try to compensate for the
+nature of that manufacturing method. As anyone familiar with 3D printing will tell you, printing threads can be kind of hit and
+miss. A lot of the time you're better off chasing the printed threads with a tap or die to clean them up, as leaving them as they
+came off the printer means you have to deal with some relatively poor tolerances. And that usually means things might have trouble
+fitting, most particularly when both the male and female parts are printed. This isn't perfect, but so far I've found it to be
+pretty helpful at not having to mess around with threads after printing to clean them up. Sometimes the compensation provided by
+this script is enough all on its own, and as threads get smaller it can help to combine this compensation with variable layer
+heights in the slicer. (For example, a 0.5 mm thread pitch printed with the standard 0.2 mm layer height could have the threads
+skip past each other with a little bit of pressure, but using variable layer heights solves this. The 0.5 mm threads work as
+intended in that case. You'll likely have less issues with your threads if you use variable layer heights regardless of the thread
+pitch, anyway.) I've been having good luck with my Bambu Labs X1-Carbon and this script for the last little while, and figured
+others might also find it helpful.
+
+The script looks in your Windows user\appdata directory to find the directory where Fusion 360 stores its thread definitions files.
+Since new updates to the app mess around with this folder structure, and the threads definition files, it contains some code to
+find the right spot, so it should continue to work as new updates are released. Just run it again after an app update. Once it
+finds the definitions it reads all the xml files in the directory and creates copies with some offsets applied according to thread
+pitch to help compensate for the printing process. This leaves the originals as they were, only creating new files to go alongside
+them. If this is not the first time you've run it, perhaps you've edited the offset coefficient and need to regenerate, it first
+deletes any old "-3Dprinting" copies, and then generates the new files. Once you fire up Fusion 360 you'll find the threads dialog
+dropdown now contains the usual threads selections, as well as copies for 3D printing.
+
 While testing this I first tried just using a single offset for all the threads, but that didn't work very well at all. Smaller
 thread pitches don't seem to need as much compensation as larger pitches do. And at a certain point there also doesn't seem to
 be any need to continue using more and more compensation. So I've made it use smaller offsets for smaller thread pitches, and as
